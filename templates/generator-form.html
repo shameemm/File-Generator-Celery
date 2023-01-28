@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <title>File Generator</title>
+        <style>
+            .card{
+                width: 400px;
+                height: 300px;
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+                margin: 0 auto;
+                margin-top: 100px;
+                padding: 20px;
+                text-align: center;
+            }
+            .card h1{
+                font-size: 30px;
+                font-weight: 500;
+                margin-bottom: 20px;
+            }
+            .card input{
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-sizing: border-box;
+            }
+            .card input[type="submit"]{
+                background-color: #00b894;
+                color: #fff;
+                font-weight: 500;
+                cursor: pointer;
+            }
+            .card input[type="submit"]:hover{
+                background-color: #00cec9;
+            }
+        </style>
+    </head>
+    <body>
+        {% load static %}
+        <link rel="stylesheet" href={% static 'css/style.css'%}>
+        <div class="card" >
+            <h1>Generate File</h1>
+            <form action="" name="generate-form" method="post" onsubmit="return Vlidate()">
+                {% csrf_token %}
+                <input type="text" name="filename" placeholder="Enter file name">
+                <input type="number" name="count" placeholder="Enter data count">
+                <input type="submit" name="submit" value="Generate">
+            </form>
+        </div>
+        <script>
+            function Vlidate(){
+                var filename = document.forms["generate-form"]["filename"].value;
+                var count = document.forms["generate-form"]["count"].value;
+                if(filename == ""){
+                    alert("Please enter file name");
+                    return false;
+                }
+                if(count == ""){
+                    alert("Please enter data count");
+                    return false;
+                }
+                else{
+                    alert("File generated successfully");
+                }
+            }
+            
+        </script>
+        
+</html>
