@@ -18,7 +18,11 @@ def generate_file(filename,count):
 
 def run_generate_file_task(filename,count):
     task = generate_file.apply_async((filename,count))
-    print(task)
-    task_log = TaskLog(id=task.id, name='generate_file', args=str((filename,count)), status=task.state)
-    
+    task_log = TaskLog(id=task.id, args=str((filename,count)), status='PENDING')
+    task_log.save()
+    task.wait()
+    if task.successful():
+        task_log.status = 'SUCCESS'
+    else:
+        task_log.status = 'FAILED'
     task_log.save()
