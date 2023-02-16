@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .tasks import run_generate_file_task
-# Create your views here.
+
+
 def test(request):
     if request.method == 'POST':
         file_name = str(request.POST.get('filename'))
